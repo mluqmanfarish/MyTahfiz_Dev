@@ -2,252 +2,571 @@
 <html lang="ms">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#065463">
-
     <title>My Tahfiz | Login</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Icons and Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #0d8aa3;
+            --primary-dark: #065463;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --warna-aksen: #14b6d6;
+            --putih: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            background-image: url(gh.png);            /* Placeholder background if image fails */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+        }
+
+        .logo {
+            margin: 60px auto 20px;
+            width: 200px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        #login-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 5vh;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .login-header {
+            border-bottom: 2px solid #ffffff;
+            padding: 0 30px 10px 30px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .loginbutton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            border: 2px solid white;
+            border-radius: 20px;
+            padding: 1rem;
+            width: 100%;
+            max-width: 280px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+        }
+
+        .loginbutton:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        .auth-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            color: var(--primary);
+            padding: 30px;
+            border-radius: 25px;
+            z-index: 100;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .auth-panel.active {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .authblur {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 50;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .bento-item {
+            border: 1.5px solid #f0f0f0;
+            background: #fafafa;
+            border-radius: 18px;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .bento-item:active { transform: scale(0.95); background: #f0f0f0; }
+        .bento-item i { font-size: 1.8rem; color: var(--primary); }
+        .bento-item span { font-size: 0.8rem; font-weight: 700; color: 065463; }
+
+        /* QR Modal */
+       .modal-qr {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .bekas-qr {
+            position: relative;
+            width: 85vw;
+            max-width: 350px;
+            aspect-ratio: 1/1;
+            background: #000;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #pembaca-qr {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        #pembaca-qr video {
+            object-fit: cover !important;
+        }
+
+        .overlay-qr {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .kawasan-imbas {
+            width: 70%;
+            height: 70%;
+            border: 2px solid var(--warna-aksen);
+            border-radius: 25px;
+            position: relative;
+            box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4);
+        }
+
+        .garisan-imbas {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--warna-aksen);
+            box-shadow: 0 0 15px var(--warna-aksen);
+            animation: gerakImbas 2s infinite ease-in-out;
+        }
+
+        @keyframes gerakImbas {
+            0%, 100% { top: 0%; }
+            50% { top: 100%; }
+        }
+
+        .kawalan-imbas {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            z-index: 3010;
+        }
+
+        .butang-kawalan {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        .butang-kawalan.aktif {
+            background: var(--warna-aksen);
+            border-color: var(--warna-aksen);
+        }
+
+        .butang-tutup {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            z-index: 3005;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .placeholderbox {
+            color: var(--primary-dark);
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 14px;
+            background: #f8f9fa;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            text-align: center;
+            outline: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .placeholderbox:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-outline {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .footer-text {
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 10px;
+            font-size: 0.7rem;
+            opacity: 0.8;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            max-width: 90%;
+            color: white;
+        }
+
+        /* Custom Alert Message Box */
+        #custom-msg {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            z-index: 5000;
+            font-size: 0.9rem;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #manual-entry-panel { display: none; }
+    </style>
 </head>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+<body>
 
-    body {
-        font-family: 'Poppins', sans-serif;
-        color: white;
-        -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
-        background-image: url("gh.png");
-    }
+    <img class="logo" src="MyTahfiz.png" alt="My Tahfiz" onerror="this.src='https://via.placeholder.com/200x80?text=My+Tahfiz'">
 
-    #login-option {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        /* Offsets the div by its own width/height */
-    }
-
-    #loginPanelGuru {
-        animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 1;
-        font-family: Poppins;
-        text-align: center;
-        display: none;
-        z-index: 2;
-        color: #0d8aa3;
-        background: white;
-        transform: translate(-50%, -50%);
-        /* Offsets the div by its own width/height */
-    }
-
-    @keyframes popIn {
-    0% {
-        opacity: 0;
-        /* Keep the centering translate AND add the starting scale */
-        transform: translate(-50%, -50%) scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        /* Keep the centering translate AND the final scale */
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-    #loginPanelPelajar {
-        animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 1;
-        color: #0d8aa3;
-        background: white;
-        font-family: Poppins;
-        text-align: center;
-        display: none;
-        z-index: 2;
-        transform: translate(-50%, -50%);
-        /* Offsets the div by its own width/height */
-    }
-
-
-    .loginbutton:hover {
-        background: #065463;
-        color: white;
-    }
-
-    .placeholderbox {
-        color: #0d8aa3;
-        font-weight: bold;
-        font-family: Poppins;
-        letter-spacing: 10px;
-        margin-top: 20px;
-        outline: none;
-        font-size: 1rem;
-        text-transform: uppercase;
-        text-align: center;
-
-    }
-
-    .placeholderbox::placeholder {
-        color: #0d8aa37a;
-        outline: none;
-        text-transform: uppercase;
-    }
-
-    .placeholderbox:focus {
-        color: #0d8aa3;
-        text-transform: uppercase;
-    }
-
-
-    .authblur {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(5px);
-        display: flex;
-        justify-content: center;
-        display: none;
-        font-family: 'Inter';
-        z-index: 1;
-
-
-    }
-</style>
-
-<body style="margin: 0%;">
-
-    <img style="margin:60px auto 20px;width:200px;display: block;align-content: center;" src="MyTahfiz.png">
-  
-
-    <div id="login-option" style="display: flex;flex-direction: column; align-items:center; gap: 1rem;">
-        <div style="border-bottom: 2px solid #ffffff; padding:0 30px 10px 30px; letter-spacing: 2px;">LOG MASUK</div>
-        <div class="loginbutton" onclick="login('guru')"
-            style="font-variation-settings: 'FILL' 1; gap: 0.5rem; display:flex; border: 2px solid; border-radius: 20px; padding: 1rem; width: 20vw;"
-            id="login-guru"><span class="material-symbols-rounded">co_present</span> Guru</div>
-        <div class="loginbutton" onclick="login('pelajar')"
-            style="font-variation-settings: 'FILL' 1; gap: 0.5rem; display:flex; border: 2px solid; border-radius: 20px; padding: 1rem; width: 20vw;"
-            id="login-guru"><span class="material-symbols-rounded">school</span> Pelajar</div>
-
+    <div id="login-option">
+        <div class="login-header">LOG MASUK</div>
+        
+        <div class="loginbutton" onclick="openPanel('guru')">
+            <span class="material-symbols-rounded">co_present</span> Guru
+        </div>
+        
+        <div class="loginbutton" onclick="openPanel('pelajar')">
+            <span class="material-symbols-rounded">school</span> Pelajar
+        </div>
     </div>
-    <div id="loginPanelGuru" style="border-radius: 10px; padding: 30px; width:fit-content;">
-        <div style="display: flex;flex-direction: column; gap:10px;">
-            <label style=" font-weight: bold;">Masukkan MyGuru ID</label>
-            <input class="placeholderbox" id="MyGuruID" placeholder="cth: G001EFG"
-                style="margin-bottom: 30px; padding: 5px; background: none;border: none; border-bottom: 2px solid #0d8aa3;">
-            <button
-                style=" cursor: pointer; background-color: #0d8aa3; padding: 10px; font-family: Poppins; color:white; font-weight:700;letter-spacing: 2px; border:none; border-radius: 10px;">TERUSKAN</button>
-            <button onclick="closeloginPanel()"
-                style=" cursor: pointer; padding: 10px;background: none; font-family: Poppins; color:rgb(4, 160, 152); font-weight:700;letter-spacing: 2px; border: 2px solid #0d8aa3; border-radius: 10px;">BATAL</button>
+
+    <div class="authblur" id="authBlur" onclick="closeAll()"></div>
+
+    <!-- Guru Panel -->
+    <div id="loginPanelGuru" class="auth-panel">
+        <div class="input-group">
+            <label style="font-weight: 700; text-align: center; margin-bottom: 10px; display: block;">Masukkan MyGuru ID</label>
+            <input class="placeholderbox" placeholder="G001EFG" id="input-guru" autocomplete="off">
+            <button class="btn-primary" onclick="proceed('guru')">TERUSKAN</button>
+            <button class="btn-outline" onclick="closeAll()">BATAL</button>
+        </div>
+    </div>
+
+    <!-- Pelajar Panel -->
+    <div id="loginPanelPelajar" class="auth-panel">
+        <label style="font-weight: 800; font-size: 1.1rem; display: block; margin-bottom: 20px;">Log Masuk Pelajar</label>
+        
+        <div id="bento-selection">
+            <div class="bento-grid">
+                <div class="bento-item" onclick="bukaModalQR()">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>Imbas QR</span>
+                </div>
+                <div class="bento-item" onclick="showManual()">
+                    <i class="fa-solid fa-keyboard"></i>
+                    <span>Kod Manual</span>
+                </div>
+            </div>
+            <button class="btn-outline" style="width:100%" onclick="closeAll()">KEMBALI</button>
         </div>
 
-        <div id="authFooter"
-            style="display: flex; flex-direction: column;align-items: center;">
-            <a href="https://wa.me/60173340373" style="
-    background: #0d8aa3;
-    padding: 10px 30px;
-    border-radius: 10px; 
-    display: flex; 
-    align-items: center; 
-    margin-top: 50px;
-    gap: 12px; 
-    color: aliceblue; 
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-
-    <span class="material-symbols-rounded" style="font-size: 1.5rem;">message</span>
-
-    <div style="text-align: left; display: flex; flex-direction: column; justify-content: center;">
-        <span style="font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; line-height: 1.2;">
-            Lupa ID ?
-        </span>
-        <span style="font-size: 0.65rem; font-weight: 400; opacity: 0.8; letter-spacing: 0.5px; line-height: 1.2;">
-            Hubungi Admin
-        </span>
+        <div id="manual-entry-panel" class="input-group">
+            <input class="placeholderbox" placeholder="T001ABC" id="input-pelajar" autocomplete="off">
+            <button class="btn-primary" onclick="proceed('pelajar')">LOG MASUK</button>
+            <button class="btn-outline" onclick="showBento()">PILIHAN LAIN</button>
+        </div>
     </div>
-</a>
 
+    <!-- QR Scanner Modal -->
+    <div id="modal-qr" class="modal-qr">
+        <button id="tutup-qr" class="butang-tutup" onclick="tutupPengimbas()"><i class="fa-solid fa-xmark"></i></button>
+        
+        <div class="bekas-qr">
+            <div id="pembaca-qr"></div>
+            <div class="overlay-qr">
+                <div class="kawasan-imbas">
+                    <div class="garisan-imbas"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="kawalan-imbas">
+            <button id="butang-torch" class="butang-kawalan">
+                <i class="fa-solid fa-bolt"></i>
+            </button>
+            <button id="butang-flip" class="butang-kawalan">
+                <i class="fa-solid fa-camera-rotate"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="custom-msg"></div>
+
+    <h6 class="footer-text">
+        Akses terhad untuk pengguna Guru ID atau TahfizID yang sah sahaja. Dengan log masuk, anda bersetuju dengan Terma & Syarat.
+    </h6>
+
+    <script>
+        let pengimbasHtml5 = null;
+        let lampuAktif = false;
+        let modKamera = "environment"; 
+
+        function showMsg(text) {
+            const el = document.getElementById('custom-msg');
+            el.innerText = text;
+            el.style.display = 'block';
+            setTimeout(() => { el.style.display = 'none'; }, 3000);
+        }
+
+        function openPanel(type) {
+            document.getElementById('authBlur').style.display = "block";
+            if(type === 'guru') {
+                document.getElementById('loginPanelGuru').classList.add('active');
+            } else {
+                document.getElementById('loginPanelPelajar').classList.add('active');
+                showBento();
+            }
+        }
+
+        function closeAll() {
+            document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('authBlur').style.display = "none";
+            tutupPengimbas();
+        }
+
+        function showManual() {
+            document.getElementById('bento-selection').style.display = "none";
+            document.getElementById('manual-entry-panel').style.display = "flex";
+        }
+
+        function showBento() {
+            document.getElementById('bento-selection').style.display = "block";
+            document.getElementById('manual-entry-panel').style.display = "none";
+        }
+
+        function bukaModalQR() {
+            document.getElementById('modal-qr').style.display = "flex";
+            mulaImbas();
+        }
+
+        async function mulaImbas() {
+            if (!pengimbasHtml5) {
+                pengimbasHtml5 = new Html5Qrcode("pembaca-qr");
+            }
+
+            const konfig = { 
+                fps: 20, 
+                qrbox: { width: 250, height: 250 },
+                aspectRatio: 1.0
+            };
+
+            try {
+                if (pengimbasHtml5.isScanning) {
+                    await pengimbasHtml5.stop();
+                }
+
+                await pengimbasHtml5.start(
+                    { facingMode: modKamera }, 
+                    konfig, 
+                    (teks) => {
+                        prosesBerjaya(teks);
+                    }
+                );
+                
+                // Torch check
+                try {
+                    const track = pengimbasHtml5.getRunningTrack();
+                    const capabilities = track.getCapabilities();
+                    document.getElementById('butang-torch').style.display = capabilities.torch ? 'flex' : 'none';
+                } catch(e) {
+                    document.getElementById('butang-torch').style.display = 'none';
+                }
+
+            } catch (err) {
+                console.error("Kamera Error:", err);
+                showMsg("Gagal akses kamera.");
+            }
+        }
+
+        document.getElementById('butang-torch').addEventListener('click', async () => {
+            if (!pengimbasHtml5 || !pengimbasHtml5.isScanning) return;
+            const track = pengimbasHtml5.getRunningTrack();
+            lampuAktif = !lampuAktif;
+            try {
+                await track.applyConstraints({ advanced: [{ torch: lampuAktif }] });
+                document.getElementById('butang-torch').classList.toggle('aktif', lampuAktif);
+            } catch (e) { console.error(e); }
+        });
+
+        document.getElementById('butang-flip').addEventListener('click', async () => {
+            modKamera = (modKamera === "environment") ? "user" : "environment";
+            mulaImbas();
+        });
+
+        async function tutupPengimbas() {
+            if (pengimbasHtml5 && pengimbasHtml5.isScanning) {
+                try { await pengimbasHtml5.stop(); } catch (err) { }
+            }
+            lampuAktif = false;
+            document.getElementById('butang-torch').classList.remove('aktif');
+            document.getElementById('modal-qr').style.display = 'none';
+        }
+
+        function prosesBerjaya(data) {
+            if (navigator.vibrate) navigator.vibrate(100);
+            tutupPengimbas();
+            showMsg("ID Dikesan: " + data);
+            // Example: redirect if it's a URL or handle as ID
+            setTimeout(() => {
+                alert("Berjaya log masuk: " + data);
+            }, 500);
+        }
+
+        function proceed(type) {
+            const inputId = type === 'guru' ? 'input-guru' : 'input-pelajar';
+            const val = document.getElementById(inputId).value.trim();
+            if(!val) return showMsg("Sila masukkan ID");
             
-        </div>
+            showMsg("Menghubung...");
+            setTimeout(() => {
+                alert("Log masuk sebagai " + val);
+            }, 800);
+        }
 
-
-    </div>
-
-    <div id="loginPanelPelajar" style="border-radius: 10px; padding: 30px; width:fit-content;">
-        <div style="display: flex;flex-direction: column; gap:10px;">
-            <label style=" font-weight: bold;">Masukkan MyTahfiz ID</label>
-            <input class="placeholderbox" id="MyTahfizID" placeholder="cth: G001EFG"
-                style="margin-bottom: 30px; padding: 5px; background: none;border: none; border-bottom: 2px solid #0d8aa3;">
-            <button
-                style=" cursor: pointer; background-color: #0d8aa3; padding: 10px; font-family: Poppins; color:white; font-weight:700;letter-spacing: 2px; border:none; border-radius: 10px;">TERUSKAN</button>
-            <button onclick="closeloginPanel()"
-                style=" cursor: pointer; padding: 10px;background: none; font-family: Poppins; color:#0d8aa3; font-weight:700;letter-spacing: 2px; border: 2px solid #0d8aa3; border-radius: 10px;">BATAL</button>
-
-        </div>
-
-        <div id="authFooter"
-            style="display: flex; flex-direction: column;align-items: center;">
-            <a href="https://wa.me/60173340373" style="
-    background: #0d8aa3;
-    padding: 10px 30px;
-    border-radius: 10px; 
-    display: flex; 
-    align-items: center; 
-    margin-top: 50px;
-    gap: 12px; 
-    color: aliceblue; 
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-
-    <span class="material-symbols-rounded" style="font-size: 1.5rem;">message</span>
-
-    <div style="text-align: left; display: flex; flex-direction: column; justify-content: center;">
-        <span style="font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; line-height: 1.2;">
-            Lupa ID ?
-        </span>
-        <span style="font-size: 0.65rem; font-weight: 400; opacity: 0.8; letter-spacing: 0.5px; line-height: 1.2;">
-            Hubungi Admin
-        </span>
-    </div>
-</a>
-
-            
-        </div>
-
-
-    </div>
-    <div class="authblur"></div>
-    <h6 style="padding-bottom: 10px; text-align: center; position:absolute;top:80%; margin: 20px;font-weight: 500; ">Akses terhad untuk pengguna Guru ID atau TahfizID yang sah sahaja. Dengan log masuk, anda bersetuju dengan Terma & Syarat. Pastikan maklumat akaun dirahsiakan bagi mengelakkan tindakan tatatertib.</h6>
+        window.onload = () => {
+            // Remove calls to non-existent functions to prevent errors
+            console.log("My Tahfiz Login Ready");
+        };
+    </script>
 </body>
-<script>
-
-    function login(loginChannel) {
-        if (loginChannel == "guru") {
-            document.getElementById("loginPanelGuru").style.display = "block";
-            document.getElementsByClassName("authblur")[0].style.display = "block";
-        }
-
-        if (loginChannel == "pelajar") {
-            document.getElementById("loginPanelPelajar").style.display = "block";
-            document.getElementsByClassName("authblur")[0].style.display = "block";
-        }
-
-    }
-
-    function closeloginPanel() {
-        document.getElementById("loginPanelGuru").style.display = "none";
-        document.getElementById("loginPanelPelajar").style.display = "none";
-        document.getElementsByClassName("authblur")[0].style.display = "none";
-    }
-</script>
-
 </html>
