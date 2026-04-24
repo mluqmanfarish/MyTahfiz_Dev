@@ -405,7 +405,17 @@
 
 #reader {
     width: 100% !important;
+    background-color: #000 !important; /* Change green to black */
     border: none !important;
+    overflow: hidden !important;
+}
+
+/* Target the actual video element created by the library */
+#reader video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* This crops the edges to fill the box */
+    border-radius: 2rem; /* Matches your container */
 }
 
 /* Custom Scan UI */
@@ -723,9 +733,11 @@
 }
 
 // Call on load
-document.addEventListener('DOMContentLoaded', displayDates);
-document.querySelector('.progress-fill').style.width = '85%';
-document.querySelector('.progress-percentage').innerText = '85%';
+document.addEventListener('DOMContentLoaded', function() {
+    displayDates();
+    document.querySelector('.progress-fill').style.width = '85%';
+    document.querySelector('.progress-percentage').innerText = '85%';
+});
    
 // Initialize the Scanner
 const html5QrCode = new Html5Qrcode("reader");
