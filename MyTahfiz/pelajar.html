@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#065463">
-    <title>My Tahfiz | Guru</title>
+    <title>My Tahfiz | Pelajar</title>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -174,46 +174,7 @@
         }
 
         /* --- Bekas Bento (Butang Aksi) --- */
-        .bekas-bento {
-            width: 90%;
-            background: var(--putih);
-            padding: 25px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            display: block;
-            margin: 20px auto;
-        }
-
-        .grid-bento {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .item-bento {
-            border: none;
-            padding: 20px 10px;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-                        font-family: Poppins;
-
-            transition: transform 0.2s;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .item-bento:active { transform: scale(0.95); }
-
-        .butang-qr { background: #e0f7fa; color: #00838f; }
-        .butang-manual { background: #f3e5f5; color: #6a1b9a; }
-
-        .ikon-bento i { font-size: 1.8rem; }
-        .teks-bento { display: flex; flex-direction: column; }
-        .label-utama { font-weight: 700; font-size: 0.85rem; }
-        .label-sub { font-size: 0.65rem; opacity: 0.7; }
+        
 
         /* --- Kad Kemajuan --- */
         .kad-kemajuan {
@@ -273,128 +234,7 @@
         }
 
         /* --- Modal QR --- */
-        .modal-qr {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bekas-qr {
-            position: relative;
-            width: 85vw;
-            max-width: 350px;
-            aspect-ratio: 1/1;
-            background: #000;
-            border-radius: 2rem;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #pembaca-qr {
-            width: 100% !important;
-            height: 100% !important;
-            border: none !important;
-        }
-
-        #pembaca-qr * {
-            border: none !important;
-        }
-
-        #pembaca-qr video {
-            object-fit: cover !important;
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        .overlay-qr {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            pointer-events: none;
-        }
-
-        .kawasan-imbas {
-            width: 70%;
-            height: 70%;
-            border: 2px solid var(--warna-aksen);
-            border-radius: 25px;
-            position: relative;
-            box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4);
-        }
-
-        .garisan-imbas {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: var(--warna-aksen);
-            box-shadow: 0 0 15px var(--warna-aksen);
-            animation: gerakImbas 2s infinite ease-in-out;
-        }
-
-        @keyframes gerakImbas {
-            0%, 100% { top: 0%; }
-            50% { top: 100%; }
-        }
-
-        .kawalan-imbas {
-            position: absolute;
-            bottom: 12vh;
-            display: flex;
-            gap: 20px;
-            z-index: 3010;
-        }
-
-        .butang-kawalan {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
-
-        .butang-kawalan.aktif {
-            background: var(--warna-aksen);
-            border-color: var(--warna-aksen);
-        }
-
-        .butang-tutup {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: var(--putih);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            z-index: 3005;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+       
 .floating-nav {
     /* Letakkan di posisi tetap */
     position: fixed;
@@ -534,26 +374,8 @@
             </div>
         </div>
 
-        <div class="bekas-bento">
-            <div class="grid-bento">
-                <button class="item-bento butang-qr" id="buka-pengimbas">
-                    <div class="ikon-bento"><i class="fa-solid fa-qrcode"></i></div>
-                    <div class="teks-bento">
-                        <span class="label-utama">Imbas QR</span>
-                        <span class="label-sub">Automatik</span>
-                    </div>
-                </button>
-
-                <button class="item-bento butang-manual" id="buka-manual">
-                    <div class="ikon-bento"><i class="fa-solid fa-keyboard"></i></div>
-                    <div class="teks-bento">
-                        <span class="label-utama">Manual</span>
-                        <span class="label-sub">Taip Kod</span>
-                    </div>
-                </button>
-            </div>
-        </div>
-
+        
+          
         <div class="kad-kemajuan">
             <div class="header-kemajuan">
                 <span class="label-kemajuan">BAKI MUKA SURAT</span>
@@ -566,29 +388,6 @@
             </div>
         </div>
 
-        <!-- Modal Pengimbas QR -->
-        <div id="modal-qr" class="modal-qr">
-            <button id="tutup-qr" class="butang-tutup"><i class="fa-solid fa-xmark"></i></button>
-            
-            <div class="bekas-qr">
-                <div id="pembaca-qr"></div>
-                <div class="overlay-qr">
-                    <div class="kawasan-imbas">
-                        <div class="garisan-imbas"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kawalan Tambahan -->
-            <div class="kawalan-imbas">
-                <button id="butang-torch" class="butang-kawalan">
-                    <i class="fa-solid fa-bolt"></i>
-                </button>
-                <button id="butang-flip" class="butang-kawalan">
-                    <i class="fa-solid fa-camera-rotate"></i>
-                </button>
-            </div>
-        </div>
 
         <main class="kandungan-bawah">
             <h3 style="margin-bottom: 15px; font-size: 1rem;">Aktiviti Terkini</h3>
@@ -634,118 +433,10 @@
             }, 300);
         }
 
-        // Logik Pengimbas QR
-        let pengimbasHtml5 = null;
-        let lampuAktif = false;
-        let modKamera = "environment"; 
-        const modalQr = document.getElementById('modal-qr');
-        const butangTorch = document.getElementById('butang-torch');
-
-        function inisialisasiPengimbas() {
-            if (!pengimbasHtml5) {
-                pengimbasHtml5 = new Html5Qrcode("pembaca-qr");
-            }
-        }
-
-        async function mulaImbas() {
-            inisialisasiPengimbas();
-            const konfig = { 
-                fps: 25, 
-                qrbox: { width: 250, height: 250 },
-                aspectRatio: 1.0
-            };
-
-            try {
-                // Pastikan kamera lama ditutup sebelum mula baru (penting untuk Laptop)
-                if (pengimbasHtml5.isScanning) {
-                    await pengimbasHtml5.stop();
-                }
-
-                await pengimbasHtml5.start(
-                    { facingMode: modKamera }, 
-                    konfig, 
-                    (teks) => {
-                        prosesBerjaya(teks);
-                        tutupPengimbas();
-                    }
-                );
-                
-                // Semak keupayaan lampu suluh (biasanya hanya ada pada Telefon)
-                try {
-                    const track = pengimbasHtml5.getRunningTrack();
-                    const capabilities = track.getCapabilities();
-                    if (capabilities.torch) {
-                        butangTorch.style.display = 'flex';
-                    } else {
-                        butangTorch.style.display = 'none';
-                    }
-                } catch(e) {
-                    butangTorch.style.display = 'none';
-                }
-
-            } catch (err) {
-                console.warn("Kamera tidak dapat dimulakan (Web Mode):", err);
-                // Jangan tutup modal secara automatik supaya user tahu ada ralat atau boleh tekan Flip
-            }
-        }
-
-        document.getElementById('buka-pengimbas').addEventListener('click', () => {
-            modalQr.style.display = 'flex';
-            mulaImbas();
-        });
-
-        // Logik Torch (Lampu Suluh)
-        butangTorch.addEventListener('click', async () => {
-            if (!pengimbasHtml5 || !pengimbasHtml5.isScanning) return;
-            
-            const track = pengimbasHtml5.getRunningTrack();
-            lampuAktif = !lampuAktif;
-            
-            try {
-                await track.applyConstraints({
-                    advanced: [{ torch: lampuAktif }]
-                });
-                butangTorch.classList.toggle('aktif', lampuAktif);
-            } catch (e) {
-                console.error("Gagal kawal lampu:", e);
-            }
-        });
-
-        // Logik Flip Kamera
-        document.getElementById('butang-flip').addEventListener('click', async () => {
-            modKamera = (modKamera === "environment") ? "user" : "environment";
-            // Pada Laptop, cuba paksa restart scanner dengan mode kamera berbeza
-            mulaImbas();
-        });
-
-        async function tutupPengimbas() {
-            if (pengimbasHtml5 && pengimbasHtml5.isScanning) {
-                try {
-                    await pengimbasHtml5.stop();
-                } catch (err) {
-                    console.error("Gagal tutup:", err);
-                }
-            }
-            lampuAktif = false;
-            butangTorch.classList.remove('aktif');
-            modalQr.style.display = 'none';
-        }
-
-        function prosesBerjaya(data) {
-            if (navigator.vibrate) navigator.vibrate(100);
-            console.log("Data Imbasan:", data);
-            window.location.href = data; // Contoh: Redirect ke URL yang diimbas, atau fallback ke halaman utama
-        }
-
-        document.getElementById('tutup-qr').addEventListener('click', (e) => {
-            e.preventDefault();
-            tutupPengimbas();
-        });
-
+    
         window.onload = () => {
             paparTarikh();
             kemaskiniKemajuan(85);
-            inisialisasiPengimbas();
         };
     </script>
 </body>

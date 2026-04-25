@@ -440,6 +440,11 @@
         let pengimbasHtml5 = null;
         let lampuAktif = false;
         let modKamera = "environment"; 
+        let IDpengguna = "";
+
+function auth() {  if (IDpengguna === "pelajar") {
+            window.location.href = "pelajar.html";
+        }}
 
         function showMsg(text) {
             const el = document.getElementById('custom-msg');
@@ -548,8 +553,9 @@
             showMsg("ID Dikesan: " + data);
             // Example: redirect if it's a URL or handle as ID
             setTimeout(() => {
-                alert("Berjaya log masuk: " + data);
             }, 500);
+            IDpengguna = data.toString(); // Simulate setting user ID after successful auth
+            auth();
         }
 
         function proceed(type) {
@@ -562,6 +568,8 @@
                 alert("Log masuk sebagai " + val);
             }, 800);
         }
+
+        
 
         window.onload = () => {
             // Remove calls to non-existent functions to prevent errors
