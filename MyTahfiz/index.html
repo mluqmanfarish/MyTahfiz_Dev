@@ -33,7 +33,7 @@
             margin: 0;
             padding: 0;
             color: white;
-            background-image: url(gh.png);            /* Placeholder background if image fails */
+            background-image: url('./asset/background_image.png');            /* Placeholder background if image fails */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -356,7 +356,7 @@
 
 <body>
 
-    <img class="logo" src="MyTahfiz.png" alt="My Tahfiz" onerror="this.src='https://via.placeholder.com/200x80?text=My+Tahfiz'">
+    <img class="logo" src="./asset/MyTahfiz.png" alt="My Tahfiz" onerror="this.src='https://via.placeholder.com/200x80?text=My+Tahfiz'">
 
     <div id="login-option">
         <div class="login-header">LOG MASUK</div>
@@ -444,6 +444,10 @@
 
 function auth() {  if (IDpengguna === "pelajar") {
             window.location.href = "pelajar.html";
+        }else if (IDpengguna === "guru") {
+            window.location.href = "guru.html";
+        } else {
+            showMsg("ID tidak dikenali.");
         }}
 
         function showMsg(text) {
