@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#065463">
+    <title>My Tahfiz | Rekod Tasmie'</title>
+    
+    <!-- Pustaka Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --kaca-putih: rgba(255, 255, 255, 0.12);
+            --aksen-kuning: #ffcc00;
+            --hijau-segar: #2ecc71;
+            --merah-padam: #e74c3c;
+            --gelap: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--biru-tahfiz) url("../asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: var(--putih);
+            padding-bottom: 40px;
+        }
+
+        /* Navigasi Atas */
+        .header-nav {
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .btn-kembali {
+            background: var(--kaca-putih);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        /* Info Pelajar Ringkas */
+        .kad-pelajar-ringkas {
+            margin: 10px 20px;
+            padding: 15px;
+            background: var(--kaca-putih);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar-kecil {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: var(--putih);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--biru-tahfiz);
+        }
+
+        /* Borang Input */
+        .kontena-borang {
+            background: var(--putih);
+            color: var(--gelap);
+            margin: 20px;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .tajuk-borang {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--biru-tahfiz);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #888;
+            margin-bottom: 8px;
+            margin-left: 5px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 15px;
+            border: 1.5px solid #eee;
+            background: #f9f9f9;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: var(--biru-muda);
+            background: #fff;
+        }
+
+        .grid-tasmie {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Pilihan Gred */
+        .gred-pilihan {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .chip-gred {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1.5px solid #eee;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .chip-gred.aktif[data-gred="Mumtaz"] { background: #e8fcf1; border-color: var(--hijau-segar); color: var(--hijau-segar); }
+        .chip-gred.aktif[data-gred="Jayyid"] { background: #fffcf0; border-color: var(--aksen-kuning); color: #d4ac0d; }
+        .chip-gred.aktif[data-gred="Dhaif"] { background: #fff5f5; border-color: var(--merah-padam); color: var(--merah-padam); }
+
+        /* Butang Hantar */
+        .btn-hantar {
+            width: 100%;
+            background: var(--biru-tahfiz);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(11, 108, 128, 0.2);
+            cursor: pointer;
+        }
+
+        /* Sejarah Ringkas */
+        .sejarah-tasmie {
+            margin: 25px 20px;
+        }
+
+        .tajuk-sejarah {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .kad-sejarah {
+            background: var(--kaca-putih);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-bacaan h5 { font-size: 0.85rem; margin-bottom: 2px; }
+        .info-bacaan p { font-size: 0.7rem; opacity: 0.7; }
+        
+        .badge-gred {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            background: var(--hijau-segar);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-nav">
+        <button class="btn-kembali" onclick="window.history.back()">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="nama-guru">
+            <p style="font-size: 0.7rem; opacity: 0.8;">Halaqah Abuzahraa</p>
+            <h2 style="font-size: 1.1rem; font-weight: 700;">Rekod Tasmie' Baru</h2>
+        </div>
+    </div>
+
+    <!-- Info Pelajar -->
+    <div class="kad-pelajar-ringkas">
+        <div class="avatar-kecil">AZ</div>
+        <div>
+            <h3 style="font-size: 0.95rem; font-weight: 700;">Ahmad Zaki Bin Yusof</h3>
+            <p style="font-size: 0.7rem; opacity: 0.8;">Hafazan Terakhir: Surah Al-Kahfi (Ayat 1-10)</p>
+        </div>
+    </div>
+
+    <!-- Borang Rekod -->
+    <div class="kontena-borang">
+        <div class="tajuk-borang">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Input Bacaan
+        </div>
+
+        <div class="input-group">
+            <label>Surah / Juzuk</label>
+            <input type="text" class="input-field" placeholder="Contoh: Surah Al-Kahfi / Juzuk 15">
+        </div>
+
+        <div class="grid-tasmie">
+            <div class="input-group">
+                <label>Dari Ayat</label>
+                <input type="number" class="input-field" placeholder="1">
+            </div>
+            <div class="input-group">
+                <label>Hingga Ayat</label>
+                <input type="number" class="input-field" placeholder="20">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Penilaian (Gred)</label>
+            <div class="gred-pilihan">
+                <div class="chip-gred aktif" data-gred="Mumtaz" onclick="pilihGred(this)">Mumtaz</div>
+                <div class="chip-gred" data-gred="Jayyid" onclick="pilihGred(this)">Jayyid</div>
+                <div class="chip-gred" data-gred="Dhaif" onclick="pilihGred(this)">Dhaif</div>
+            </div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 10px;">
+            <label>Nota / Teguran</label>
+            <textarea class="input-field" rows="2" placeholder="Contoh: Perbaiki makhraj huruf Ra'..." style="resize: none;"></textarea>
+        </div>
+
+        <button class="btn-hantar" onclick="simpanRekod()">
+            <i class="fa-solid fa-cloud-arrow-up" style="margin-right: 8px;"></i> Simpan Rekod Tasmie'
+        </button>
+    </div>
+
+    <!-- Sejarah Ringkas 3 Terakhir -->
+    <div class="sejarah-tasmie">
+        <h4 class="tajuk-sejarah">Rekod Terkini</h4>
+        
+        <div class="kad-sejarah">
+            <div class="info-bacaan">
+                <h5>Surah Al-Kahfi: 1-10</h5>
+                <p>24 April 2026 • Semalam</p>
+            </div>
+            <div class="badge-gred">MUMTAZ</div>
+        </div>
+
+        <div class="kad-sejarah">
+            <div class="info-bacaan">
+                <h5>Surah Al-Isra': 90-110</h5>
+                <p>22 April 2026 • 3 hari lepas</p>
+            </div>
+            <div class="badge-gred" style="background: var(--aksen-kuning); color: #7d6608;">JAYYID</div>
+        </div>
+    </div>
+
+    <script>
+        function pilihGred(el) {
+            // Buang kelas aktif dari semua chip
+            document.querySelectorAll('.chip-gred').forEach(chip => {
+                chip.classList.remove('aktif');
+            });
+            // Tambah kelas aktif pada yang dipilih
+            el.classList.add('aktif');
+        }
+
+        function simpanRekod() {
+            // Animasi maklum balas ringkas
+            const btn = document.querySelector('.btn-hantar');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memproses...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.style.background = 'var(--hijau-segar)';
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Berjaya Disimpan';
+                
+                setTimeout(() => {
+                    alert('Rekod tasmie telah berjaya dikemaskini ke dalam pangkalan data.');
+                    window.history.back();
+                }, 800);
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

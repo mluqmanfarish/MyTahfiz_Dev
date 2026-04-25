@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#065463">
+    <title>My Tahfiz | Profil Guru</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --kaca-putih: rgba(255, 255, 255, 0.12);
+            --aksen-kuning: #ffcc00;
+            --hijau-segar: #2ecc71;
+            --gelap: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--biru-tahfiz) url("../asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: var(--putih);
+            padding-bottom: 100px;
+        }
+
+        /* Header Profil */
+        .header-profil {
+            padding: 40px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(11, 108, 128, 0.5), transparent);
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .avatar-besar {
+            width: 110px;
+            height: 110px;
+            border-radius: 35px;
+            border: 4px solid var(--putih);
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .badge-status {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: var(--hijau-segar);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 3px solid var(--biru-tahfiz);
+        }
+
+        .header-profil h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+        .header-profil p { font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.5px; }
+
+        /* Grid Statistik */
+        .grid-stat {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            padding: 0 20px;
+            margin-bottom: 25px;
+        }
+
+        .kad-stat-profil {
+            background: var(--kaca-putih);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 15px 10px;
+            text-align: center;
+        }
+
+        .kad-stat-profil i { font-size: 1.2rem; color: var(--aksen-kuning); margin-bottom: 8px; display: block; }
+        .kad-stat-profil .nilai { font-size: 1.1rem; font-weight: 800; display: block; }
+        .kad-stat-profil .label { font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; font-weight: 600; }
+
+        /* Kandungan Utama */
+        .kontena-putih {
+            background: var(--putih);
+            color: var(--gelap);
+            margin: 0 20px;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .tajuk-seksyen {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--biru-tahfiz);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .item-info i {
+            width: 35px;
+            height: 35px;
+            background: #f0f7f9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--biru-muda);
+            font-size: 0.9rem;
+        }
+
+        .item-info div span { display: block; }
+        .item-info .label { font-size: 0.7rem; color: #999; font-weight: 500; }
+        .item-info .data { font-size: 0.85rem; font-weight: 600; color: #333; }
+
+        /* Progres Seksyen */
+        .progres-hafazan {
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 1px dashed #eee;
+        }
+
+        .bar-luar {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .bar-dalam {
+            height: 100%;
+            background: linear-gradient(to right, var(--biru-muda), var(--hijau-segar));
+            border-radius: 10px;
+        }
+
+        .btn-kembali {
+            position: absolute;
+            top: 25px;
+            left: 20px;
+            background: var(--kaca-putih);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 12px;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="btn-kembali" onclick="window.history.back()">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
+
+    <div class="header-profil">
+        <div class="avatar-container">
+            <img src="https://ui-avatars.com/api/?name=Luqman+Hakim&background=fff&color=0b6c80&size=200" class="avatar-besar">
+            <div class="badge-status"></div>
+        </div>
+        <h2>Ustaz Luqman Hakim</h2>
+        <p>Ketua Halaqah Abuzahraa • Guru Tahfiz Senior</p>
+    </div>
+
+    <div class="grid-stat">
+        <div class="kad-stat-profil">
+            <i class="fa-solid fa-users"></i>
+            <span class="nilai">15</span>
+            <span class="label">Pelajar</span>
+        </div>
+        <div class="kad-stat-profil">
+            <i class="fa-solid fa-award"></i>
+            <span class="nilai">Aktif</span>
+            <span class="label">Status</span>
+        </div>
+        <div class="kad-stat-profil">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span class="nilai">95%</span>
+            <span class="label">Kehadiran</span>
+        </div>
+    </div>
+
+    <div class="kontena-putih">
+        <div class="tajuk-seksyen">
+            <i class="fa-solid fa-briefcase"></i>
+            Maklumat Perkhidmatan
+        </div>
+
+        <div class="item-info">
+            <i class="fa-solid fa-id-badge"></i>
+            <div>
+                <span class="label">ID Guru / Staff</span>
+                <span class="data">G-2408801</span>
+            </div>
+        </div>
+
+        <div class="item-info">
+            <i class="fa-solid fa-layer-group"></i>
+            <div>
+                <span class="label">Gred Jawatan</span>
+                <span class="data">Pegawai Perkhidmatan Pendidikan (DG41)</span>
+            </div>
+        </div>
+
+        <div class="item-info">
+            <i class="fa-solid fa-book-quran"></i>
+            <div>
+                <span class="label">Kepakaran Utama</span>
+                <span class="data">Takhassus Qiraat & Hafazan</span>
+            </div>
+        </div>
+
+        <div class="progres-hafazan">
+            <div class="tajuk-seksyen" style="margin-bottom: 5px;">
+                <i class="fa-solid fa-chart-pie"></i>
+                Pencapaian Halaqah (Khatam)
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600;">
+                <span>6/15 Pelajar Telah Khatam</span>
+                <span style="color: var(--biru-muda);">40%</span>
+            </div>
+            <div class="bar-luar">
+                <div class="bar-dalam" style="width: 40%;"></div>
+            </div>
+            <p style="font-size: 0.65rem; color: #888; text-align: center;">Prestasi Kumpulan: Cemerlang (Q1 2026)</p>
+        </div>
+        
+        <button onclick="window.print()" style="width: 100%; background: var(--biru-tahfiz); color: white; border: none; padding: 15px; border-radius: 15px; margin-top: 25px; font-weight: 700; font-size: 0.9rem;">
+            <i class="fa-solid fa-file-invoice" style="margin-right: 8px;"></i> Laporan Prestasi Mengajar
+        </button>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#065463">
+    <title>My Tahfiz | Halaqah Abuzahraa</title>
+    
+    <!-- Pustaka Ikon dan Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        /* Definisi Tema Warna My Tahfiz */
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --kaca-putih: rgba(255, 255, 255, 0.12);
+            --aksen-kuning: #ffffff;
+            --merah-padam: #e74c3c;
+            --hijau-segar: #2ecc71;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--biru-tahfiz) url("../asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: var(--putih);
+            padding-bottom: 100px;
+            overflow-x: hidden;
+        }
+
+        /* Navigasi Atas */
+        .header-nav {
+            padding: 25px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .profil-guru {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gambar-profil {
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            border: 2px solid var(--putih);
+            object-fit: cover;
+        }
+
+        .nama-guru h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        /* Kad Maklumat Halaqah */
+        .kad-info-utama {
+            margin: 10px 20px;
+            padding: 20px;
+            background: var(--kaca-putih);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .kad-info-utama .label { font-size: 0.75rem; opacity: 0.8; font-weight: 500; }
+        .kad-info-utama .nama-h { font-size: 1.5rem; font-weight: 800; color: var(--aksen-kuning); }
+        
+        .seksyen-stat {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .mini-stat {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .mini-stat h4 { font-size: 1.1rem; }
+        .mini-stat p { font-size: 0.6rem; opacity: 0.7; text-transform: uppercase; }
+
+        /* Tajuk Seksyen */
+        .tajuk-seksyen {
+            padding: 25px 20px 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bil-item {
+            background: var(--aksen-kuning);
+            color: var(--biru-tahfiz);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* Senarai Murid */
+        .senarai-bekas {
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .kad-murid {
+            background: var(--putih);
+            color: var(--biru-tahfiz);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .kad-murid:active { transform: scale(0.98); }
+
+        .info-murid {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar-murid {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: #f0f7f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--biru-muda);
+            font-size: 1.1rem;
+        }
+
+        .teks-murid {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nama-murid { font-weight: 700; font-size: 0.95rem; color: #333; }
+        .sub-teks { font-size: 0.72rem; color: #777; display: flex; align-items: center; gap: 5px; }
+
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+
+
+        
+        /* Panel Modal */
+        .panel-tindakan {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: var(--putih);
+            border-radius: 30px 30px 0 0;
+            padding: 30px 20px;
+            z-index: 2000;
+            color: var(--biru-tahfiz);
+        }
+
+        .overlay-gelap {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1500;
+        }
+
+        .menu-aksi {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px;
+            border-bottom: 1px solid #f2f2f2;
+            cursor: pointer;
+        }
+
+        .menu-aksi i {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            background: #f0f8f9;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--biru-muda);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Utama -->
+    <div class="header-nav">
+        <div class="profil-guru">
+            <img src="https://ui-avatars.com/api/?name=Cikgu+Abuzahraa&background=14b6d6&color=fff" class="gambar-profil">
+            <div class="nama-guru">
+                <p style="font-size: 0.7rem; opacity: 0.8;">Assalamualaikum, Cikgu</p>
+                <h2>Abuzahraa</h2>
+            </div>
+        </div>
+        <i class="fa-regular fa-bell" style="font-size: 1.3rem;"></i>
+    </div>
+
+    <!-- Kad Info Halaqah -->
+    <div class="kad-info-utama">
+        <span class="label">Halaqah Aktif</span>
+        <h1 class="nama-h">Abuzahraa</h1>
+        
+        <div class="seksyen-stat">
+            <div class="mini-stat">
+                <h4 id="count-hadir">12</h4>
+                <p>Hadir Hari Ini</p>
+            </div>
+            <div class="mini-stat">
+                <h4 id="count-total">15</h4>
+                <p>Jumlah Pelajar</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tajuk Senarai -->
+    <div class="tajuk-seksyen">
+        Senarai Anak Murid
+        <span class="bil-item">15 Orang</span>
+    </div>
+
+    <!-- Bekas Senarai Murid -->
+    <div class="senarai-bekas" id="senarai-murid">
+        <!-- Data dijana melalui JavaScript -->
+    </div>
+
+
+    <!-- Modal Tindakan -->
+    <div id="overlay" class="overlay-gelap" onclick="tutupAksi()"></div>
+    <div id="panel-aksi" class="panel-tindakan">
+        <div style="width: 40px; height: 4px; background: #eee; border-radius: 10px; margin: -10px auto 20px;"></div>
+        <h3 id="nama-murid-pilihan" style="text-align: center; margin-bottom: 20px;">Nama Murid</h3>
+        
+        <div class="menu-aksi" onclick="alert('Merekod kehadiran...')">
+            <i class="fa-solid fa-check-double"></i>
+            <span>Tandakan Kehadiran</span>
+        </div>
+        <div class="menu-aksi" onclick="alert('Buka buku tasmie...')">
+            <i class="fa-solid fa-book-quran"></i>
+            <span>Rekod Tasmie'</span>
+        </div>
+        <div class="menu-aksi" onclick="alert('Lihat profil...')">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Lihat Profil Pelajar</span>
+        </div>
+        <div class="menu-aksi" onclick="tutupAksi()" style="color: var(--merah-padam); border: none;">
+            <i class="fa-solid fa-xmark" style="background: #fff5f5; color: var(--merah-padam);"></i>
+            <span>Batal</span>
+        </div>
+    </div>
+
+    <script>
+        // Data Anak Murid Halaqah Abuzahraa
+        const anakMurid = [
+            { nama: 'Ahmad Zaki Bin Yusof', kls: 'Tingkatan 5', status: 'Hadir' },
+            { nama: 'Muhammad Amirul Hakim', kls: 'Tingkatan 4', status: 'Hadir' },
+            { nama: 'Sufian Suhaimi', kls: 'Tingkatan 5', status: 'Tidak Hadir' },
+            { nama: 'Hafizuddin Bakri', kls: 'Tingkatan 4', status: 'Hadir' },
+            { nama: 'Luqman Al-Hakim', kls: 'Tingkatan 3', status: 'Hadir' },
+            { nama: 'Daniel Hakim', kls: 'Tingkatan 3', status: 'Hadir' },
+            { nama: 'Fahmi Redza', kls: 'Tingkatan 2', status: 'Hadir' },
+            { nama: 'Abdul Rahman', kls: 'Tingkatan 5', status: 'Hadir' },
+            { nama: 'Syed Azmi', kls: 'Tingkatan 4', status: 'Hadir' },
+            { nama: 'Khairul Anwar', kls: 'Tingkatan 3', status: 'Hadir' },
+            { nama: 'Zulhelmi Ishak', kls: 'Tingkatan 2', status: 'Tidak Hadir' },
+            { nama: 'Adam Harith', kls: 'Tingkatan 1', status: 'Hadir' },
+            { nama: 'Izzat Ibrahim', kls: 'Tingkatan 5', status: 'Hadir' },
+            { nama: 'Farhan Rosli', kls: 'Tingkatan 4', status: 'Hadir' },
+            { nama: 'Hariz Fadhilah', kls: 'Tingkatan 2', status: 'Tidak Hadir' }
+        ];
+
+        function binaSenarai() {
+            const bekas = document.getElementById('senarai-murid');
+            bekas.innerHTML = '';
+
+            anakMurid.forEach(m => {
+                const initial = m.nama.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+                const color = m.status === 'Hadir' ? 'var(--hijau-segar)' : 'var(--merah-padam)';
+                
+                const kad = document.createElement('div');
+                kad.className = 'kad-murid';
+                kad.onclick = () => bukaAksi(m.nama);
+                kad.innerHTML = `
+                    <div class="info-murid">
+                        <div class="avatar-murid">${initial}</div>
+                        <div class="teks-murid">
+                            <span class="nama-murid">${m.nama}</span>
+                            <span class="sub-teks">
+                                <span class="status-dot" style="background: ${color};"></span>
+                                ${m.kls} • ${m.status}
+                            </span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical" style="opacity: 0.3;"></i>
+                `;
+                bekas.appendChild(kad);
+            });
+
+            // Update counter
+            document.getElementById('count-hadir').innerText = anakMurid.filter(m => m.status === 'Hadir').length;
+            document.getElementById('count-total').innerText = anakMurid.length;
+        }
+
+        function bukaAksi(nama) {
+            document.getElementById('nama-murid-pilihan').innerText = nama;
+            document.getElementById('overlay').style.display = 'block';
+            const panel = document.getElementById('panel-aksi');
+            panel.style.display = 'block';
+            panel.animate([{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }], { duration: 250, easing: 'ease-out' });
+        }
+
+        function tutupAksi() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('panel-aksi').style.display = 'none';
+        }
+
+        // Jalankan fungsi bina senarai semasa muat
+        window.onload = binaSenarai;
+    </script>
+</body>
+</html>
