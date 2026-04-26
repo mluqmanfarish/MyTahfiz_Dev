@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0b6c80">
+    <title>My Tahfiz | Notifikasi</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --kaca-putih: rgba(255, 255, 255, 0.2);
+            --bg-light: #f8fbfc;
+            --text-main: #1a1a1a;
+            --aksen-merah: #ff4757;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--biru-tahfiz) url("../asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: var(--putih);
+        }
+
+        /* Header Modern */
+        .header-notif {
+            padding: 50px 25px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-notif h2 { font-size: 1.5rem; font-weight: 800; }
+
+        .btn-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--kaca-putih);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Container Putih */
+        .main-container {
+            background: var(--bg-light);
+            min-height: 100vh;
+            border-radius: 40px 40px 0 0;
+            padding: 30px 0;
+            color: var(--text-main);
+        }
+
+        /* Filter Chips */
+        .filter-wrapper {
+            display: flex;
+            gap: 10px;
+            padding: 0 25px 25px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .filter-wrapper::-webkit-scrollbar { display: none; }
+
+        .chip {
+            padding: 8px 18px;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #888;
+            border: 1px solid #eee;
+            white-space: nowrap;
+        }
+
+        .chip.active {
+            background: var(--biru-tahfiz);
+            color: white;
+            border-color: var(--biru-tahfiz);
+            box-shadow: 0 8px 15px rgba(11, 108, 128, 0.2);
+        }
+
+        /* List Notifikasi */
+        .notif-item {
+            display: flex;
+            padding: 20px 25px;
+            gap: 15px;
+            position: relative;
+            transition: 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .notif-item:active { background: #f0f4f5; }
+
+        .notif-item.unread {
+            background: #f0f9fb;
+        }
+
+        .notif-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--biru-muda);
+            border-radius: 50%;
+        }
+
+        .notif-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .icon-blue { background: #e3f2fd; color: #1976d2; }
+        .icon-red { background: #ffebee; color: #d32f2f; }
+        .icon-green { background: #e8f5e9; color: #388e3c; }
+
+        .notif-content { flex: 1; }
+        
+        .notif-time {
+            font-size: 0.65rem;
+            color: #aaa;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .notif-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .notif-desc {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Floating New Label */
+        .new-badge {
+            background: var(--aksen-merah);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-notif">
+        <div class="btn-icon" onclick="window.history.back()">
+            <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <h2>Notifikasi</h2>
+        <div class="btn-icon">
+            <i class="fa-solid fa-list-check"></i>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="filter-wrapper">
+            <div class="chip active">Semua</div>
+            <div class="chip">Belum Dibaca</div>
+            <div class="chip">Penting</div>
+            <div class="chip">Sistem</div>
+        </div>
+
+        <div class="notif-list">
+            
+            <div class="notif-item unread">
+                <div class="notif-icon icon-red">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <div class="notif-content">
+                    <span class="notif-time">2 MINIT LEPAS</span>
+                    <h4 class="notif-title">Kehadiran Halaqah <span class="new-badge">NEW</span></h4>
+                    <p class="notif-desc">Ustaz, sila sahkan kehadiran Halaqah Abuzahraa bagi sesi pagi ini.</p>
+                </div>
+            </div>
+
+            <div class="notif-item unread">
+                <div class="notif-icon icon-blue">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div class="notif-content">
+                    <span class="notif-time">1 JAM LEPAS</span>
+                    <h4 class="notif-title">Mesyuarat Guru Guru</h4>
+                    <p class="notif-desc">Peringatan: Mesyuarat bulanan akan diadakan di Bilik Al-Farabi jam 2:30 PM.</p>
+                </div>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-icon icon-green">
+                    <i class="fa-solid fa-check-double"></i>
+                </div>
+                <div class="notif-content">
+                    <span class="notif-time">SEMALAM</span>
+                    <h4 class="notif-title">Laporan Bulanan Siap</h4>
+                    <p class="notif-desc">Laporan prestasi pelajar bagi bulan Mac telah berjaya dijana dalam format PDF.</p>
+                </div>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-icon icon-blue">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="notif-content">
+                    <span class="notif-time">2 HARI LEPAS</span>
+                    <h4 class="notif-title">Pelajar Baru</h4>
+                    <p class="notif-desc">Seorang pelajar baru telah didaftarkan ke dalam Halaqah anda. Sila semak senarai pelajar.</p>
+                </div>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-icon icon-blue" style="background: #f0f0f0; color: #666;">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <div class="notif-content">
+                    <span class="notif-time">23 APR 2026</span>
+                    <h4 class="notif-title">Sistem Berjaya Dikemaskini</h4>
+                    <p class="notif-desc">Versi 2.0.4 kini aktif dengan penambahbaikan pada sistem pengimbas QR.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Logik ringkas untuk tukar filter
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelector('.chip.active').classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

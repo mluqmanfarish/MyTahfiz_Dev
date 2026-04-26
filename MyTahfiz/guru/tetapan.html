@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#065463">
+    <title>My Tahfiz | Tetapan</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --kaca-putih: rgba(255, 255, 255, 0.12);
+            --aksen-merah: #e74c3c;
+            --gelap: #1a1a1a;
+            --kelabu-muda: #f4f7f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--biru-tahfiz) url("../asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: var(--putih);
+            padding-bottom: 50px;
+        }
+
+        /* Header Tetapan */
+        .header-tetapan {
+            padding: 60px 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-kembali {
+            background: var(--kaca-putih);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Kontena Menu */
+        .kontena-menu {
+            background: var(--putih);
+            color: var(--gelap);
+            margin: 0 20px;
+            border-radius: 30px;
+            padding: 10px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .seksyen-menu {
+            padding: 20px 25px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-menu {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--gelap);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .item-menu:active { background: #f0f0f0; }
+
+        .item-menu i.ikon-utama {
+            width: 38px;
+            height: 38px;
+            background: var(--kelabu-muda);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--biru-tahfiz);
+            font-size: 1rem;
+        }
+
+        .item-menu .label-menu {
+            flex: 1;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .item-menu i.fa-chevron-right {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        /* Toggle Switch Style */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--biru-muda); }
+        input:checked + .slider:before { transform: translateX(18px); }
+
+        /* Butang Log Keluar */
+        .btn-logout {
+            margin: 30px 20px;
+            background: rgba(231, 77, 60, 0.562);
+            color: rgb(255, 255, 255);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            padding: 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .versi-app {
+            text-align: center;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-tetapan">
+        <button class="btn-kembali" onclick="window.history.back()">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <h2 style="font-weight: 700;">Tetapan</h2>
+    </div>
+
+    <div class="kontena-menu">
+        <div class="seksyen-menu">Akaun</div>
+        
+        <a href="profil-guru.html" class="item-menu">
+            <i class="fa-solid fa-user-gear ikon-utama"></i>
+            <span class="label-menu">Edit Profil</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
+
+        <div class="item-menu">
+            <i class="fa-solid fa-lock ikon-utama"></i>
+            <span class="label-menu">Tukar Kata Laluan</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
+        <div class="seksyen-menu">Pilihan Aplikasi</div>
+
+        <div class="item-menu">
+            <i class="fa-solid fa-bell ikon-utama"></i>
+            <span class="label-menu">Notifikasi Push</span>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="item-menu">
+            <i class="fa-solid fa-moon ikon-utama"></i>
+            <span class="label-menu">Mod Gelap</span>
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="item-menu">
+            <i class="fa-solid fa-globe ikon-utama"></i>
+            <span class="label-menu">Bahasa (BM)</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
+        <div class="seksyen-menu">Sokongan</div>
+
+        <div class="item-menu">
+            <i class="fa-solid fa-circle-info ikon-utama"></i>
+            <span class="label-menu">Pusat Bantuan</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
+        <div class="item-menu">
+            <i class="fa-solid fa-shield-halved ikon-utama"></i>
+            <span class="label-menu">Polisi Privasi</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <div class="btn-logout" onclick="confirmLogout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Log Keluar Akaun
+    </div>
+
+    <div class="versi-app">My Tahfiz v2.0.4 (Build 105)</div>
+
+    <script>
+        function confirmLogout() {
+            if(confirm("Adakah anda pasti untuk log keluar?")) {
+                // Logik log keluar di sini
+                alert("Anda telah log keluar.");
+                window.location.href = "login.html";
+            }
+        }
+
+        // Contoh logik simpan tetapan mod gelap
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('change', function() {
+            if(this.checked) {
+                alert("Mod Gelap diaktifkan (Simulasi)");
+            } else {
+                alert("Mod Terang diaktifkan (Simulasi)");
+            }
+        });
+    </script>
+
+</body>
+</html>
