@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Laman Tidak Dijumpai</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --bg-light: #f4f9fa;
+            --teks-utama: #1a1a1a;
+            --kaca: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--biru-tahfiz);
+            /* Menggunakan overlay gradient yang sama seperti design anda */
+            background: linear-gradient(rgba(11, 108, 128, 0.9), rgba(11, 108, 128, 0.9)), 
+                        url("asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--putih);
+            overflow: hidden;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Elemen Visual 404 */
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .icon-box {
+            width: 100px;
+            height: 100px;
+            background: var(--kaca);
+            backdrop-filter: blur(10px);
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Butang Kembali */
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--putih);
+            color: var(--biru-tahfiz);
+            padding: 16px 32px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: var(--biru-muda);
+            color: white;
+        }
+
+        .btn-home:active {
+            transform: scale(0.95);
+        }
+
+        /* Elemen Dekoratif */
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            font-size: 15rem;
+        }
+        .dec-1 { top: -5%; left: -10%; transform: rotate(-20deg); }
+        .dec-2 { bottom: -5%; right: -10%; transform: rotate(15deg); }
+
+    </style>
+</head>
+<body>
+
+    <i class="fa-solid fa-moon decoration dec-1"></i>
+    <i class="fa-solid fa-kaaba decoration dec-2"></i>
+
+    <div class="error-container">
+        <div class="icon-box">
+            <i class="fa-solid fa-compass-drafting"></i>
+        </div>
+        
+        <div class="error-code">404</div>
+        
+        <h1>Laman Tidak Dijumpai</h1>
+        <p>Maaf, halaman yang anda cari telah dipindahkan atau tidak lagi wujud dalam sistem My Tahfiz.</p>
+        
+        <!-- Sesuaikan href dengan lokasi login/home anda -->
+        <a href="index.html" class="btn-home">
+            <i class="fa-solid fa-house"></i>
+            Kembali ke Utama
+        </a>
+    </div>
+
+</body>
+</html>
+

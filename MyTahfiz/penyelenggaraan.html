@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penyelenggaraan | My Tahfiz</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --biru-tahfiz: #0b6c80;
+            --biru-muda: #14b6d6;
+            --putih: #ffffff;
+            --bg-light: #f4f9fa;
+            --teks-utama: #1a1a1a;
+            --kaca: rgba(255, 255, 255, 0.1);
+            --kuning: #ffb800;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--biru-tahfiz);
+            /* Menggunakan overlay gradient yang sama dengan design 404 pertama */
+            background: linear-gradient(rgba(11, 108, 128, 0.9), rgba(11, 108, 128, 0.9)), 
+                        url("asset/background_image.png") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--putih);
+            overflow: hidden;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            justify-items: center;
+
+        }
+
+        /* Elemen Visual Penyelenggaraan */
+        
+
+        .icon-box {
+            width: 100px;
+            height: 100px;
+            background: var(--kaca);
+            backdrop-filter: blur(10px);
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar Simbolik (Sama gaya dengan redesign) */
+        .loader-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .loader-bar {
+            width: 50%;
+            height: 100%;
+            background: var(--biru-muda
+            );
+            border-radius: 10px;
+            animation: moveLoader 2s infinite ease-in-out;
+        }
+
+        @keyframes moveLoader {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+
+        /* Butang Segarkan */
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--putih);
+            color: var(--biru-tahfiz);
+            padding: 16px 32px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: var(--biru-muda);
+            color: white;
+        }
+
+        .btn-home:active {
+            transform: scale(0.95);
+        }
+
+        /* Elemen Dekoratif Latar Belakang */
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            font-size: 15rem;
+        }
+        .dec-1 { top: -5%; left: -10%; transform: rotate(-20deg); }
+        .dec-2 { bottom: -5%; right: -10%; transform: rotate(15deg); }
+
+    </style>
+</head>
+<body>
+
+    <i class="fa-solid fa-screwdriver-wrench decoration dec-1"></i>
+    <i class="fa-solid fa-gear decoration dec-2"></i>
+
+    <div class="error-container">
+        <div class="icon-box">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+        
+        <div class="error-code">Penyelenggaraan</div>
+        
+        <h1>Pengemaskinian Sistem</h1>
+        <p>Maaf atas kesulitan. Kami sedang menjalankan penyelenggaraan teknikal berjadual untuk meningkatkan kualiti sistem My Tahfiz.</p>
+        
+        <div class="loader-container">
+            <div class="loader-bar"></div>
+        </div>
+
+        <a href="javascript:location.reload()" class="btn-home">
+            <i class="fa-solid fa-rotate"></i>
+            Semak Semula
+        </a>
+    </div>
+
+</body>
+</html>
