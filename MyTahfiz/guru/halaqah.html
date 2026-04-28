@@ -4,356 +4,488 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#065463">
-    <title>My Tahfiz | Halaqah Abuzahraa</title>
+    <meta name="theme-color" content="#0b6c80">
+    <title>Dashboard Guru | My Tahfiz</title>
     
-    <!-- Pustaka Ikon dan Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-        /* Definisi Tema Warna My Tahfiz */
         :root {
-            --biru-tahfiz: #0b6c80;
-            --biru-muda: #14b6d6;
-            --putih: #ffffff;
-            --kaca-putih: rgba(255, 255, 255, 0.12);
-            --aksen-kuning: #ffffff;
-            --merah-padam: #e74c3c;
-            --hijau-segar: #2ecc71;
+            --primary: #0b6c80;
+            --accent: #14b6d6;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-dark: rgba(255, 255, 255, 0.05);
+            --text-main: #1a202c;
+            --text-sub: #718096;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: var(--biru-tahfiz) url("../asset/background_image.png") no-repeat center center fixed;
+            background: var(--primary);
+            background-image: linear-gradient(rgba(11, 108, 128, 0.92), rgba(11, 108, 128, 0.98)), 
+                              url('https://images.unsplash.com/photo-1584281723350-67634f66432b?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
+            background-attachment: fixed;
             min-height: 100vh;
-            color: var(--putih);
-            padding-bottom: 100px;
-            overflow-x: hidden;
+            color: var(--white);
+            padding-bottom: 40px;
         }
 
-        /* Navigasi Atas */
-        .header-nav {
-            padding: 25px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .profil-guru {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .gambar-profil {
-            width: 45px;
-            height: 45px;
-            border-radius: 15px;
-            border: 2px solid var(--putih);
-            object-fit: cover;
-        }
-
-        .nama-guru h2 {
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        /* Kad Maklumat Halaqah */
-        .kad-info-utama {
-            margin: 10px 20px;
-            padding: 20px;
-            background: var(--kaca-putih);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .kad-info-utama .label { font-size: 0.75rem; opacity: 0.8; font-weight: 500; }
-        .kad-info-utama .nama-h { font-size: 1.5rem; font-weight: 800; color: var(--aksen-kuning); }
-        
-        .seksyen-stat {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 5px;
-        }
-
-        .mini-stat {
-            background: rgba(255,255,255,0.05);
-            padding: 10px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .mini-stat h4 { font-size: 1.1rem; }
-        .mini-stat p { font-size: 0.6rem; opacity: 0.7; text-transform: uppercase; }
-
-        /* Tajuk Seksyen */
-        .tajuk-seksyen {
-            padding: 25px 20px 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
+        /* Top Header */
+        .header {
+            padding: 20px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .bil-item {
-            background: var(--aksen-kuning);
-            color: var(--biru-tahfiz);
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 800;
-        }
-
-        /* Senarai Murid */
-        .senarai-bekas {
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .kad-murid {
-            background: var(--putih);
-            color: var(--biru-tahfiz);
-            border-radius: 20px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .kad-murid:active { transform: scale(0.98); }
-
-        .info-murid {
+        .left-header {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
-        .avatar-murid {
-            width: 44px;
-            height: 44px;
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background: var(--glass);
             border-radius: 14px;
-            background: #f0f7f9;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            color: var(--biru-muda);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.2s;
+        }
+
+        .back-button:active {
+            transform: scale(0.9);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar-ring {
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--accent), var(--success));
+        }
+
+        .avatar-ring img {
+            width: 100%;
+            height: 100%;
+            border-radius: 13px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .welcome-text h2 {
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .welcome-text p {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .notif-badge {
+            position: relative;
+            background: var(--glass);
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .badge-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 18px;
+            border-radius: 22px;
+        }
+
+        .stat-card i {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        /* List Section */
+        .main-container {
+            background: var(--white);
+            border-radius: 40px 40px 0 0;
+            padding: 25px 20px;
+            min-height: 500px;
+            color: var(--text-main);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-header h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .search-bar {
+            background: #f4f7f8;
+            border-radius: 15px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Student Card */
+        .student-card {
+            background: var(--white);
+            border: 1px solid #edf2f7;
+            border-radius: 22px;
+            padding: 15px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .student-card:active {
+            transform: scale(0.97);
+            background: #f8fafc;
+        }
+
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--primary);
             font-size: 1.1rem;
         }
 
-        .teks-murid {
+        .student-info {
+            flex: 1;
+        }
+
+        .student-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #2d3748;
+        }
+
+        .progress-mini {
+            height: 5px;
+            background: #edf2f7;
+            border-radius: 10px;
+            width: 100%;
+            margin: 6px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .tag-row {
             display: flex;
-            flex-direction: column;
+            gap: 6px;
         }
 
-        .nama-murid { font-weight: 700; font-size: 0.95rem; color: #333; }
-        .sub-teks { font-size: 0.72rem; color: #777; display: flex; align-items: center; gap: 5px; }
+        .tag {
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
 
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; }
+        .tag-blue { background: #e0f2fe; color: #0369a1; }
+        .tag-green { background: #dcfce7; color: #15803d; }
+        .tag-orange { background: #fff5f5; color: var(--danger); }
 
-
-
-        
-        /* Panel Modal */
-        .panel-tindakan {
-            display: none;
+        /* Bottom Action Sheet */
+        .overlay {
             position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: var(--putih);
-            border-radius: 30px 30px 0 0;
-            padding: 30px 20px;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            display: none;
             z-index: 2000;
-            color: var(--biru-tahfiz);
         }
 
-        .overlay-gelap {
-            display: none;
+        .bottom-sheet {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 1500;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 35px 35px 0 0;
+            padding: 30px 20px 40px;
+            z-index: 3000;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .menu-aksi {
+        .sheet-active .bottom-sheet { transform: translateY(0); }
+        .sheet-active .overlay { display: block; }
+
+        .handle {
+            width: 40px;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin: -10px auto 25px;
+        }
+
+        .action-item {
             display: flex;
             align-items: center;
             gap: 15px;
             padding: 16px;
-            border-bottom: 1px solid #f2f2f2;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            background: #f8fafc;
+            font-weight: 600;
+            color: #4a5568;
             cursor: pointer;
         }
 
-        .menu-aksi i {
-            width: 38px; height: 38px;
-            border-radius: 10px;
-            background: #f0f8f9;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--biru-muda);
+        .action-item i {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header Utama -->
-    <div class="header-nav">
-        <div class="profil-guru">
-            <img src="https://ui-avatars.com/api/?name=Cikgu+Abuzahraa&background=14b6d6&color=fff" class="gambar-profil">
-            <div class="nama-guru">
-                <p style="font-size: 0.7rem; opacity: 0.8;">Assalamualaikum, Cikgu</p>
-                <h2>Abuzahraa</h2>
+    <div class="header">
+        <div class="left-header">
+            <!-- Butang Back Ditambah Semula -->
+            <div class="back-button" onclick="window.location.href = 'guru.html';">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar-ring">
+                    <img src="https://ui-avatars.com/api/?name=Ustaz+Abuzahraa&background=0b6c80&color=fff" alt="Guru">
+                </div>
+                <div class="welcome-text">
+                    <p>Halaqah Aktif</p>
+                    <h2>Abuzahraa</h2>
+                </div>
             </div>
         </div>
-        <i class="fa-regular fa-bell" style="font-size: 1.3rem;"></i>
-    </div>
-
-    <!-- Kad Info Halaqah -->
-    <div class="kad-info-utama">
-        <span class="label">Halaqah Aktif</span>
-        <h1 class="nama-h">Abuzahraa</h1>
         
-        <div class="seksyen-stat">
-            <div class="mini-stat">
-                <h4 id="count-hadir">12</h4>
-                <p>Hadir Hari Ini</p>
+        <div class="notif-badge">
+            <i class="fa-regular fa-bell"></i>
+            <div class="badge-dot"></div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>15</h3>
+            <p>Anak Halaqah</p>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>12</h3>
+            <p>Hadir Hari Ini</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="section-header">
+            <h3>Senarai Pelajar</h3>
+            <div style="color: var(--accent); font-weight: 700; font-size: 0.8rem;">15 Orang</div>
+        </div>
+
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass" style="color: #cbd5e0;"></i>
+            <input type="text" placeholder="Cari nama anak murid...">
+        </div>
+
+        <div id="student-list">
+            <!-- Pelajar 1 -->
+            <div class="student-card" onclick="openSheet('Ahmad Zaki Bin Yusof')">
+                <div class="student-avatar">AZ</div>
+                <div class="student-info">
+                    <h4>Ahmad Zaki Bin Yusof</h4>
+                    <div class="tag-row">
+                        <span class="tag tag-blue">Tingkatan 5</span>
+                        <span class="tag tag-green">Hadir</span>
+                    </div>
+                    <div class="progress-mini">
+                        <div class="progress-bar" style="width: 75%;"></div>
+                    </div>
+                    <p style="font-size: 0.6rem; color: #a0aec0;">Hafazan: Juzuk 18 (Surah Al-Kahfi)</p>
+                </div>
+                <i class="fa-solid fa-angle-right" style="color: #cbd5e0;"></i>
             </div>
-            <div class="mini-stat">
-                <h4 id="count-total">15</h4>
-                <p>Jumlah Pelajar</p>
+
+            <!-- Pelajar 2 -->
+            <div class="student-card" onclick="openSheet('Muhammad Amirul Hakim')">
+                <div class="student-avatar">AH</div>
+                <div class="student-info">
+                    <h4>Muhammad Amirul Hakim</h4>
+                    <div class="tag-row">
+                        <span class="tag tag-blue">Tingkatan 4</span>
+                        <span class="tag tag-green">Hadir</span>
+                    </div>
+                    <div class="progress-mini">
+                        <div class="progress-bar" style="width: 45%;"></div>
+                    </div>
+                    <p style="font-size: 0.6rem; color: #a0aec0;">Hafazan: Juzuk 5 (Surah An-Nisa)</p>
+                </div>
+                <i class="fa-solid fa-angle-right" style="color: #cbd5e0;"></i>
+            </div>
+
+            <!-- Pelajar 3 -->
+            <div class="student-card" onclick="openSheet('Sufian Suhaimi')">
+                <div class="student-avatar" style="background: #fff5f5; color: var(--danger);">SS</div>
+                <div class="student-info">
+                    <h4>Sufian Suhaimi</h4>
+                    <div class="tag-row">
+                        <span class="tag tag-blue">Tingkatan 5</span>
+                        <span class="tag tag-orange">Tidak Hadir</span>
+                    </div>
+                    <div class="progress-mini">
+                        <div class="progress-bar" style="width: 90%; background: var(--success);"></div>
+                    </div>
+                    <p style="font-size: 0.6rem; color: #a0aec0;">Hafazan: Juzuk 29 (Surah Al-Mulk)</p>
+                </div>
+                <i class="fa-solid fa-angle-right" style="color: #cbd5e0;"></i>
             </div>
         </div>
     </div>
 
-    <!-- Tajuk Senarai -->
-    <div class="tajuk-seksyen">
-        Senarai Anak Murid
-        <span class="bil-item">15 Orang</span>
-    </div>
-
-    <!-- Bekas Senarai Murid -->
-    <div class="senarai-bekas" id="senarai-murid">
-        <!-- Data dijana melalui JavaScript -->
-    </div>
-
-
-    <!-- Modal Tindakan -->
-    <div id="overlay" class="overlay-gelap" onclick="tutupAksi()"></div>
-    <div id="panel-aksi" class="panel-tindakan">
-        <div style="width: 40px; height: 4px; background: #eee; border-radius: 10px; margin: -10px auto 20px;"></div>
-        <h3 id="nama-murid-pilihan" style="text-align: center; margin-bottom: 20px;">Nama Murid</h3>
+    <!-- UI Components -->
+    <div class="overlay" id="overlay" onclick="closeSheet()"></div>
+    
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="handle"></div>
+        <h3 id="selected-student" style="text-align: center; margin-bottom: 20px; font-weight: 800;">Nama Pelajar</h3>
         
-        <div class="menu-aksi" onclick="alert('Merekod kehadiran...')">
-            <i class="fa-solid fa-check-double"></i>
-            <span>Tandakan Kehadiran</span>
+        <div class="action-item" onclick="handleAction('Kehadiran')">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Tanda Kehadiran</span>
         </div>
-        <div class="menu-aksi" onclick="alert('Buka buku tasmie...')">
+        
+        <div class="action-item" onclick="handleAction('Tasmik')">
             <i class="fa-solid fa-book-quran"></i>
-            <span>Rekod Tasmie'</span>
+            <span>Rekod Tasmik</span>
         </div>
-        <div class="menu-aksi" onclick="alert('Lihat profil...')">
+        
+        <div class="action-item" onclick="handleAction('Profil')">
             <i class="fa-solid fa-user-graduate"></i>
-            <span>Lihat Profil Pelajar</span>
+            <span>Lihat Profil Penuh</span>
         </div>
-        <div class="menu-aksi" onclick="tutupAksi()" style="color: var(--merah-padam); border: none;">
-            <i class="fa-solid fa-xmark" style="background: #fff5f5; color: var(--merah-padam);"></i>
+        
+        <div class="action-item" onclick="closeSheet()" style="color: var(--danger); background: #fff5f5; margin-top: 10px;">
+            <i class="fa-solid fa-xmark" style="color: var(--danger); background: white;"></i>
             <span>Batal</span>
         </div>
     </div>
 
     <script>
-        // Data Anak Murid Halaqah Abuzahraa
-        const anakMurid = [
-            { nama: 'Ahmad Zaki Bin Yusof', kls: 'Tingkatan 5', status: 'Hadir' },
-            { nama: 'Muhammad Amirul Hakim', kls: 'Tingkatan 4', status: 'Hadir' },
-            { nama: 'Sufian Suhaimi', kls: 'Tingkatan 5', status: 'Tidak Hadir' },
-            { nama: 'Hafizuddin Bakri', kls: 'Tingkatan 4', status: 'Hadir' },
-            { nama: 'Luqman Al-Hakim', kls: 'Tingkatan 3', status: 'Hadir' },
-            { nama: 'Daniel Hakim', kls: 'Tingkatan 3', status: 'Hadir' },
-            { nama: 'Fahmi Redza', kls: 'Tingkatan 2', status: 'Hadir' },
-            { nama: 'Abdul Rahman', kls: 'Tingkatan 5', status: 'Hadir' },
-            { nama: 'Syed Azmi', kls: 'Tingkatan 4', status: 'Hadir' },
-            { nama: 'Khairul Anwar', kls: 'Tingkatan 3', status: 'Hadir' },
-            { nama: 'Zulhelmi Ishak', kls: 'Tingkatan 2', status: 'Tidak Hadir' },
-            { nama: 'Adam Harith', kls: 'Tingkatan 1', status: 'Hadir' },
-            { nama: 'Izzat Ibrahim', kls: 'Tingkatan 5', status: 'Hadir' },
-            { nama: 'Farhan Rosli', kls: 'Tingkatan 4', status: 'Hadir' },
-            { nama: 'Hariz Fadhilah', kls: 'Tingkatan 2', status: 'Tidak Hadir' }
-        ];
-
-        function binaSenarai() {
-            const bekas = document.getElementById('senarai-murid');
-            bekas.innerHTML = '';
-
-            anakMurid.forEach(m => {
-                const initial = m.nama.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
-                const color = m.status === 'Hadir' ? 'var(--hijau-segar)' : 'var(--merah-padam)';
-                
-                const kad = document.createElement('div');
-                kad.className = 'kad-murid';
-                kad.onclick = () => bukaAksi(m.nama);
-                kad.innerHTML = `
-                    <div class="info-murid">
-                        <div class="avatar-murid">${initial}</div>
-                        <div class="teks-murid">
-                            <span class="nama-murid">${m.nama}</span>
-                            <span class="sub-teks">
-                                <span class="status-dot" style="background: ${color};"></span>
-                                ${m.kls} • ${m.status}
-                            </span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-ellipsis-vertical" style="opacity: 0.3;"></i>
-                `;
-                bekas.appendChild(kad);
-            });
-
-            // Update counter
-            document.getElementById('count-hadir').innerText = anakMurid.filter(m => m.status === 'Hadir').length;
-            document.getElementById('count-total').innerText = anakMurid.length;
+        function openSheet(name) {
+            document.getElementById('selected-student').innerText = name;
+            document.body.classList.add('sheet-active');
         }
 
-        function bukaAksi(nama) {
-            document.getElementById('nama-murid-pilihan').innerText = nama;
-            document.getElementById('overlay').style.display = 'block';
-            const panel = document.getElementById('panel-aksi');
-            panel.style.display = 'block';
-            panel.animate([{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }], { duration: 250, easing: 'ease-out' });
+        function closeSheet() {
+            document.body.classList.remove('sheet-active');
         }
 
-        function tutupAksi() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('panel-aksi').style.display = 'none';
+        function handleAction(type) {
+            alert(`Aksi ${type} sedang diproses...`);
+            closeSheet();
         }
-
-        // Jalankan fungsi bina senarai semasa muat
-        window.onload = binaSenarai;
     </script>
 </body>
 </html>
